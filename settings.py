@@ -1,5 +1,11 @@
 # script to instruct API on how it should perform, to configure behavior of our API
 
+# X_DOMAINS = None # this tells our Eve instance that it should not accept the requests coming from web pages
+                   # which are not in the same domains as the server, which is usually not the case
+
+X_DOMAINS = '*'    # if you have public server, you want to accept incoming requests from anybody
+
+X_DOMAINS_RE = ['^http://sub-\d{3}\.example\.com$'] # we only accepting requests from http://sub-\d  or  \.example\.com
 # mongo connection string to local instance
 # see http://docs.mongodb.com/manual/reference/connection-string/
 MONGO_URI = 'mongodb://localhost:27017/eve_course'
