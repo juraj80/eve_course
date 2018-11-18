@@ -26,8 +26,53 @@ IF_MATCH = False
 
 # we want to define a schema against which every single document coming into our people endpoint will be validated
 people_schema = {
-    'firstname': {'type':'string'},
-    'lastname': {'type':'string'},
+    'firstname': {
+        'type':'string',
+        'minlength':1,
+        'maxlength':30,
+    },
+
+    'lastname': {
+        'type':'string',
+        'maxlength':50,
+        'required': True,
+        'unique': True,   # doesn't apply for bulk inserts
+    },
+
+    'middle_name': {
+      'dependencies' : ['firstname','lastname', 'location.address'] # the field itself is not required, but if you provide a middle name
+                                                # you also must provide the first name and last name, otherwise the field
+                                                # would be rejected
+    },
+
+    'born': {'type' : 'datetime'},
+#    'age' : {'readonly' : True},  # clients can't write or overwrite it
+    'age': {
+        'type': 'integer',
+        'coerce': int   # converts passed value to integer
+    },
+    'role' : {
+        'type': 'list',
+        'allowed': ['author','contributor','copy'],
+        'default': ['author']
+    },
+    'location': {
+        'type' : 'dict',
+        'required': True,
+        'schema' : {
+            'address': {'type':'string'},
+            'city':{'type':'string','required': True}
+        },
+    },
+    'email': {
+        'type': 'string',
+        'regex': r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    },
+    'prop1' : {
+        'anyof_type': ['integer', 'float'],  # example of *of-rules typesaver
+        'anyof': [{'min': 0,'max': 10}, {'min': 100, 'max': 110}] # example of *of-rules from http://docs.python-cerberus.org/en/stable/validation-rules.html#of-rules
+
+    }
 }
 
 # every key in this dictionary is an endpoint and value is another dictionary where you configure your endpoint behavior
