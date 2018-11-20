@@ -21,9 +21,33 @@ IF_MATCH = False
 
 #EMBEDDING = False # is True by default on global level
 
-# PATCH - to edit document
-# PUT - to replace document
-# DELETE - to delete document
+#DATE_FORMAT = '%d %b %Y' # setting which allows us to change default rfc 1123 format for datetime string values
+
+QUERY_WHERE = 'find'
+QUERY_SORT = 'orderby'
+
+# ALLOWED_FILTERS = ['*']  # to allow searching on all fields, by default
+ALLOWED_FILTERS = [] # to disable searching to  none fields
+# ALLOWED_FILTERS = ['lastname'] # better to filter on endpoint level
+
+SORTING = False #to disable sorting on global level, by default is True globally
+
+#MONGO_QUERY_BLACKLIST = ['$where','$regex'] # by default, to disable Javascript operators where and regex
+#MONGO_QUERY_BLACKLIST = [] # to allow $where and $regex query operators
+
+PAGINATION = False
+QUERY_PAGE = 'section'
+MAX_QUERY_RESULT = 'max_results' # default settings is 25 documents per page
+PAGINATION_DEFAULT = 25
+PAGINATION_LIMIT = 50
+OPTIMIZE_PAGINATION_FOR_SPEED = True  # is disabled by default, on big collections can greatly improve performance but lacks of accuracy
+
+# PROJECTION = False # to disable projections on all endpoints
+# QUERY_PROJECTION = 'fields'  # to change to word for query projections
+
+## PATCH - to edit document
+## PUT - to replace document
+## DELETE - to delete document
 
 # set the DOMAIN, where you design your API surface
 
@@ -104,6 +128,11 @@ works_schema = {
 # every key in this dictionary is an endpoint and value is another dictionary where you configure your endpoint structure
 DOMAIN = {
     'people': {
+        'pagination' : True,
+        'allowed_filters': ['lastname'],
+        'sorting': True,
+        # 'projection': True,
+        'datasource' : {'projection':{'lastname':0}} # every request sent
         'schema' : people_schema    #the schema for the people endpoint is previously defined schema
     },
     'works':{
