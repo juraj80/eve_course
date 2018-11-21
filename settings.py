@@ -1,5 +1,5 @@
 # script to instruct API on how it should perform, to configure behavior of our API
-
+from app import MyBasicAuth
 # X_DOMAINS = None # this tells our Eve instance that it should not accept the requests coming from web pages
                    # which are not in the same domains as the server, which is usually not the case
 
@@ -52,7 +52,7 @@ ITEM_METHODS = ['GET','PATCH','PUT','DELETE']
 # LINKS = 'links'
 # JSON = False
 # JSON_SORT_KEYS = True
-JSON_REQUEST_CONTENT_TYPES = ['application/json', 'application/csp-report']
+# JSON_REQUEST_CONTENT_TYPES = ['application/json', 'application/csp-report']
 
 ## PATCH - to edit document
 ## PUT - to replace document
@@ -137,6 +137,7 @@ works_schema = {
 # every key in this dictionary is an endpoint and value is another dictionary where you configure your endpoint structure
 DOMAIN = {
     'people': {
+        'authentication': MyBasicAuth,
         # 'hateoas': False,
         # 'pagination' : True,
         # 'allowed_filters': ['lastname'],
