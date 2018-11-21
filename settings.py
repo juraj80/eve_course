@@ -15,35 +15,44 @@ RESOURCE_METHODS = ['GET','POST','DELETE']
 # global methods allowed at the document (item) endpoint
 ITEM_METHODS = ['GET','PATCH','PUT','DELETE']
 
-# if False, we need to add an if match header every single time we perform an edit operation on a document
-IF_MATCH = False
 
+# IF_MATCH = False # if False, we need to add an if match header every single time we perform an edit operation on a document
+# IF_MATCH = True
+# ENFORCE_IF_MATCH = False # we let the client decide how the server should accept our edit request.
+# ETAG = 'etag'
+# DATE_CREATED = 'created'
+# LAST_UPDATED = 'updated'
 
 #EMBEDDING = False # is True by default on global level
 
 #DATE_FORMAT = '%d %b %Y' # setting which allows us to change default rfc 1123 format for datetime string values
 
-QUERY_WHERE = 'find'
-QUERY_SORT = 'orderby'
+# QUERY_WHERE = 'find'
+# QUERY_SORT = 'orderby'
 
 # ALLOWED_FILTERS = ['*']  # to allow searching on all fields, by default
-ALLOWED_FILTERS = [] # to disable searching to  none fields
+# ALLOWED_FILTERS = [] # to disable searching to  none fields
 # ALLOWED_FILTERS = ['lastname'] # better to filter on endpoint level
 
-SORTING = False #to disable sorting on global level, by default is True globally
+# SORTING = False #to disable sorting on global level, by default is True globally
 
 #MONGO_QUERY_BLACKLIST = ['$where','$regex'] # by default, to disable Javascript operators where and regex
 #MONGO_QUERY_BLACKLIST = [] # to allow $where and $regex query operators
 
-PAGINATION = False
-QUERY_PAGE = 'section'
-MAX_QUERY_RESULT = 'max_results' # default settings is 25 documents per page
-PAGINATION_DEFAULT = 25
-PAGINATION_LIMIT = 50
-OPTIMIZE_PAGINATION_FOR_SPEED = True  # is disabled by default, on big collections can greatly improve performance but lacks of accuracy
+# PAGINATION = False
+# QUERY_PAGE = 'section'
+# MAX_QUERY_RESULT = 'max_results' # default settings is 25 documents per page
+# PAGINATION_DEFAULT = 25
+# PAGINATION_LIMIT = 50
+# OPTIMIZE_PAGINATION_FOR_SPEED = True  # is disabled by default, on big collections can greatly improve performance but lacks of accuracy
 
 # PROJECTION = False # to disable projections on all endpoints
 # QUERY_PROJECTION = 'fields'  # to change to word for query projections
+# HATEOAS = True
+# LINKS = 'links'
+# JSON = False
+# JSON_SORT_KEYS = True
+JSON_REQUEST_CONTENT_TYPES = ['application/json', 'application/csp-report']
 
 ## PATCH - to edit document
 ## PUT - to replace document
@@ -128,11 +137,12 @@ works_schema = {
 # every key in this dictionary is an endpoint and value is another dictionary where you configure your endpoint structure
 DOMAIN = {
     'people': {
-        'pagination' : True,
-        'allowed_filters': ['lastname'],
-        'sorting': True,
+        # 'hateoas': False,
+        # 'pagination' : True,
+        # 'allowed_filters': ['lastname'],
+        # 'sorting': True,
         # 'projection': True,
-        'datasource' : {'projection':{'lastname':0}} # every request sent
+        # 'datasource' : {'projection':{'lastname':0}}, # every request sent
         'schema' : people_schema    #the schema for the people endpoint is previously defined schema
     },
     'works':{
