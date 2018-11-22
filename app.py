@@ -1,4 +1,6 @@
 import re
+from datetime import date
+from redis import Redis
 
 from eve import Eve
 from eve.io.mongo import Validator
@@ -10,10 +12,7 @@ class MyBasicAuth(BasicAuth):
             pass
         if method in ('POST','PATCH','PUT','DELETE'):
             pass
-
         return username == 'admin' and password == 'secret'
-
-
 
 class MyValidator(Validator):
      def _validate_isodd(self,isodd, field, value):
@@ -40,7 +39,7 @@ def add_age(resource, items):
             item['age'] = today.year - item['born'].year
 
 
-app = Eve(validator = MyValidator)
+app = Eve(validator = MyValidator, redis = Redis()) # we didn't set the host for the redis instance, it will connect to local host
 
 # attach a callback function to GET requests.
 app.on_fetched_item += inject_signature # a new field is returned to the client, but since we injected it right after

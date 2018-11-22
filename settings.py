@@ -54,6 +54,11 @@ ITEM_METHODS = ['GET','PATCH','PUT','DELETE']
 # JSON_SORT_KEYS = True
 # JSON_REQUEST_CONTENT_TYPES = ['application/json', 'application/csp-report']
 
+
+# Rate limiting
+RATE_LIMIT_GET = (1,60) # 1 request every 60 seconds
+RATE_LIMIT_POST = (1,60)
+
 ## PATCH - to edit document
 ## PUT - to replace document
 ## DELETE - to delete document
