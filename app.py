@@ -16,7 +16,6 @@ def hello():
     """ A Eve instance is still a 100% Flask application """
     return 'Hello, world!'
 
-
 # attach a callback function to GET requests.
 app.on_fetched_item += inject_signature  # a new field is returned to the client, but since we injected it right after
 # reading it from the db, it is not in the database

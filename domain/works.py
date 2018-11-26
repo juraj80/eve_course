@@ -21,12 +21,9 @@ works_schema = {
     },
 }
 
-
-
 works = {
     # 'embedding': False,  # at resource level embedding is turned off, so works can't be embedded
     'schema': works_schema
     # 'resource_methods': ['GET'], #we want this endpoint to be read only, so we overwrite the global setting
     # 'item_methods': ['GET']
 }
-
