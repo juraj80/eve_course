@@ -2,7 +2,6 @@
 
 from domain import DOMAIN
 
-
 # X_DOMAINS = None # this tells our Eve instance that it should not accept the requests coming from web pages
 # which are not in the same domains as the server, which is usually not the case
 

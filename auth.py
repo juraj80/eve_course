@@ -1,7 +1,6 @@
 from eve.auth import BasicAuth
 
 
-
 class MyBasicAuth(BasicAuth):
     """ Custom authentication logic is provided by a subclass of
     eve.auth.BasicAuth

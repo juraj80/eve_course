@@ -1,6 +1,5 @@
 from app import MyBasicAuth
 
-
 people_schema = {
     # A dict defining the actual data structure being handled by the resource.
     # Enables data validation.
@@ -64,8 +63,6 @@ people_schema = {
     #
     # }
 }
-
-
 
 people = {
     # A class with the authorization logic for the endpoint. If not provided
